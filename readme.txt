@@ -3,8 +3,8 @@ Contributors: chipbennett
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QP3N9HUSYJPK6
 Tags: cbnet, maxblogpress, auto-activate, activation
 Requires at least: 2.9
-Tested up to: 3.0.3
-Stable tag: 1.1.3
+Tested up to: 3.5
+Stable tag: 1.1.4
 
 Automatically activate MaxBlogPress plugins, without registering and without subscribing to the MaxBlogPress email list.
 
@@ -13,6 +13,8 @@ Automatically activate MaxBlogPress plugins, without registering and without sub
 MaxBlogPress plugins require a two-step registration/activation process, as well as a forced opt-in to an email-list subscription, in order to use them. This plugin circumvents those requirements, enabling unrestricted use of the plugins.
 
 **Note:** this plugin *does not install any other plugins*. If you wish to use any MaxBlogPress plugins supported by cbnet MBP Auto-Activate, you must install them separately.
+
+**Note 2:** This Plugin is not an endorsement for MaxBlogPress Plugins, but rather a proof-of-concept to demonstrate why it is futile to force users to jump through Plugin-registration and email-list-subscription hoops just to use Plugin functionality. It appears that some or all of MaxBlogPress Plugins are now released under a non-GPL-compatible license that restricts code modification. Use them at your own risk.
 
 This plugin currently supports the following MaxBlogPress plugins:
 
@@ -100,6 +102,11 @@ Screenshots coming soon.
 
 == Changelog ==
 
+= 1.1.4 =
+* Bugfix release
+* Cleaned up a few PHP notices
+* Restored status page CSS
+* Cleaned up for WordPress 3.5
 = 1.1.3 =
 * Bugfix release. 
 * Fixed bug that prevented proper activation of Max Banner Ads plugin.
@@ -117,7 +124,8 @@ Screenshots coming soon.
 
 == Upgrade Notice ==
 
-
+= 1.1.4 =
+Bugfix release. Cleaned up for WordPress 3.5, cleaned up PHP notices, restored status page CSS
 = 1.1.3 =
 Bugfix release. Fixed bug that prevented proper activation of Max Banner Ads plugin.
 = 1.1.2 =

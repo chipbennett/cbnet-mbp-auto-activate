@@ -3,7 +3,7 @@
  * Plugin Name:   cbnet MBP Auto-Activate
  * Plugin URI:    http://www.chipbennett.net/wordpress/plugins/cbnet-mbp-auto-activate/
  * Description:   Automatically activate MaxBlogPress plugins, without registering and without subscribing to the MaxBlogPress email list.
- * Version:       1.1.3
+ * Version:       1.1.4
  * Author:        chipbennett
  * Author URI:    http://www.chipbennett.net/
  *
@@ -24,9 +24,6 @@
  * with this plugin. And thanks also to all the other fine folks at  the
  * WPTavern Forum (http://www.wptavern.com/forum) for their help.
  */
- 
-define('cbnetmbpauto_NAME', 'cbnet MBP Auto-Activate');	// Name of the Plugin
-define('cbnetmbpauto_VERSION', '1.1.3');				// Current version of the Plugin
 
 /**
  * cbnetMBPauto - cbnet MBP Auto-Activate Class
@@ -41,7 +38,7 @@ class cbnetmbpauto
 	function cbnetmbpauto() { 
 	
 		// Define an array containing the prefixes for all MaxBlogPress plugins:
-		$this->cbnetmbpautoPrefixes = array( 'dppp', 'mdw', 'mup', 'mpo', 'msa', 'ps', 'mfi', 'spl', 'mban', 'dpc', 'mcn', 'ofa', 'facp', 'adr', 'ffr', 'mbp_lmw', 'mbp_ba', 'mbp_apl', 'mbpri', 'abc', 'captcha', 'mbp_alt', 'mbp_io', 'rc', 'mbp_po', 'mbp_pi', 'mbp_plbc', 'mbp_el' );
+		$this->cbnetmbpautoPrefixes = array( 'dppp', 'mdw', 'mup', 'mpo', 'msa', 'ps', 'mfi', 'spl', 'mban', 'dpc', 'mcn', 'ofa', 'fpbc', 'adr', 'ffr', 'mbp_lmw', 'mbp_ba', 'mbp_apl', 'mbpri', 'abc', 'captcha', 'mbp_alt', 'mbp_io', 'rc', 'mbp_po', 'mbp_pi', 'mbp_plbc', 'mbp_el' );
 		
 		// Define arrays for each plugin, with the following values: name, prefix, installed state
 		$this->cbnetmbpauto_dppp = array( 'plugin' => 'different-posts-per-page', 'pluginname' => 'Different Posts Per Page', 'prefix' => 'dppp', 'installed' => 'false' );
@@ -56,7 +53,7 @@ class cbnetmbpauto
 		$this->cbnetmbpauto_dpc = array( 'plugin' => 'duplicate-post-checker', 'pluginname' => 'Duplicate Post Checker', 'prefix' => 'dpc', 'installed' => 'false' );
 		$this->cbnetmbpauto_mcn = array( 'plugin' => 'multi-author-comment-notification', 'pluginname' => 'Multi Author Comment Notification', 'prefix' => 'mcn', 'installed' => 'false' );
 		$this->cbnetmbpauto_ofa = array( 'plugin' => 'maxblogpress-optin-form-adder', 'pluginname' => 'Optin Form Adder', 'prefix' => 'ofa', 'installed' => 'false' );
-		$this->cbnetmbpauto_fbpc = array( 'plugin' => 'front-page-by-category', 'pluginname' => 'Front Page By Category', 'prefix' => 'fpbc', 'installed' => 'false' );
+		$this->cbnetmbpauto_fpbc = array( 'plugin' => 'front-page-by-category', 'pluginname' => 'Front Page By Category', 'prefix' => 'fpbc', 'installed' => 'false' );
 		$this->cbnetmbpauto_adr = array( 'plugin' => 'adsense-deluxe-revisited', 'pluginname' => 'AdSense Deluxe Revisited', 'prefix' => 'adr', 'installed' => 'false' );
 		$this->cbnetmbpauto_ffr = array( 'plugin' => 'flash-fader-revived', 'pluginname' => 'Flash Fader Revived', 'prefix' => 'ffr', 'installed' => 'false' );
 		$this->cbnetmbpauto_mbp_lmw = array( 'plugin' => 'links-manage-widget', 'pluginname' => 'Links Manage Widget', 'prefix' => 'mbp_lmw', 'installed' => 'false' );
@@ -74,11 +71,10 @@ class cbnetmbpauto
 		$this->cbnetmbpauto_mbp_el = array( 'plugin' => 'excerpt-listing', 'pluginname' => 'Excerpt Listing', 'prefix' => 'mbp_el', 'installed' => 'false' );
 		
 		// Hooks - codex: http://codex.wordpress.org/Plugin_API
-	    add_action('activate_'.$this->cbnetmbpauto_path, array(&$this, 'cbnetmbpautoActivate'));
+		register_activation_hook( __FILE__, array( $this, 'cbnetmbpautoActivate' ) );
 		add_action('admin_init', array(&$this, 'cbnetmbpautoUpdateOptions')); 
 		add_action('admin_menu', array(&$this, 'cbnetmbpautoAddMenu')); 
 		add_filter('plugin_action_links_'.plugin_basename(__FILE__), array($this, 'cbnetmbpauto_actlinks'), 10, 1 );
-		// add_action('admin_head', array(&$this, 'cbnetmbpauto_css'));
 	}
 	
 	/**
@@ -112,7 +108,7 @@ class cbnetmbpauto
 		add_options_page('cbnet MBP Auto-Activate', 'cbnet MBP Auto-Activate', 'manage_options', 'cbnet-mbp-auto-activate', array(&$this, 'cbnetmbpautoOptionsPg'));
 		// Using get_plugin_page_hook
 		$cbnetmbpautohook = get_plugin_page_hook('cbnet-mbp-auto-activate', 'options-general.php');
-		add_action("admin_head-{$hook}", array(&$this, 'cbnetmbpauto_css'));
+		add_action("admin_head-$cbnetmbpautohook", array(&$this, 'cbnetmbpauto_css'));
 	}
 
 	/**
@@ -133,9 +129,8 @@ class cbnetmbpauto
 			?>
 			
 			<div class="wrap">
-			 <h2><?php echo cbnetmbpauto_NAME; ?></h2>
-			
-			<h3>MaxBlogPress Plugins - Status</h3>
+			 <h2>MaxBlogPress Plugins - Status</h2>
+			 
 			<table id="cbnetmbpauto">
 			<tr>
 				<th style="width:400px;">Plugin Name</th>
@@ -176,10 +171,6 @@ class cbnetmbpauto
 						<?php }
 				?>
 				</table>
-			
-			 <p style="text-align:center;margin-top:3em;font-weight:bold;">
-				<?php echo cbnetmbpauto_NAME.' '.cbnetmbpauto_VERSION; ?>  by <a href="http://www.chipbennett.net/" target="_blank" >Chip Bennett</a>
-			 </p>
 			</div>
 			<?php
 		}
