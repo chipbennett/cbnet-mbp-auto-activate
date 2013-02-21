@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: cbnet, maxblogpress, auto-activate, activation
 Requires at least: 2.9
 Tested up to: 3.5
-Stable tag: 1.2
+Stable tag: 1.2.1
 
 Automatically activate MaxBlogPress plugins, without registering and without subscribing to the MaxBlogPress email list.
 
@@ -102,6 +102,8 @@ Screenshots coming soon.
 
 == Changelog ==
 
+= 1.2.1 =
+* Minor bugfix: class member function not referenced properly
 = 1.2 =
 * Made Plugin translation-ready
 = 1.1.4 =
@@ -126,6 +128,8 @@ Screenshots coming soon.
 
 == Upgrade Notice ==
 
+= 1.2.1 =
+Bugfix release. Fixed class member function called incorrectly.
 = 1.2 =
 Made Plugin translation-ready
 = 1.1.4 =

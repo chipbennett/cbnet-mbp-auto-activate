@@ -3,7 +3,7 @@
  * Plugin Name:   cbnet MBP Auto-Activate
  * Plugin URI:    http://www.chipbennett.net/wordpress/plugins/cbnet-mbp-auto-activate/
  * Description:   Automatically activate MaxBlogPress plugins, without registering and without subscribing to the MaxBlogPress email list.
- * Version:       1.2
+ * Version:       1.2.1
  * Author:        chipbennett
  * Author URI:    http://www.chipbennett.net/
  *
@@ -90,7 +90,7 @@ class cbnetmbpauto
 	 * Called when plugin is activated and when an Admin page is loaded. Adds option value to the options table.
 	 */
 	function cbnetmbpautoActivate() {
-		cbnetmbpautoUpdateOptions();
+		$this->cbnetmbpautoUpdateOptions();
 		return true;
 	}
 	
